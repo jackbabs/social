@@ -1,0 +1,208 @@
+/* home */
+
+body {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  margin: auto;
+}
+
+.topbar-container {
+  margin: 0 auto;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
+}
+
+.topbar-text {
+  padding-right: 20px;
+  display: inline;
+}
+
+.topbar-close {
+  padding-top: 5px;
+  float: right;
+}
+
+.title-columnone {
+  margin-top: 25vh;
+}
+
+.title-columntwo {
+  margin-top: 17vh;
+}
+
+.title-section {
+  height: 100vh;
+}
+
+.title-title {
+  font-size: 40px;
+  float: left;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 600;
+  color: #2185d0;
+}
+
+.title-subtitle {
+  font-size: 40px;
+  float: left;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 600;
+  text-align: left;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.title-section p {
+  padding-top: 20px;
+  padding-bottom: 25px;
+  font-size: 20px;
+  float: left;
+  text-align: left;
+  line-height: 1.9;
+  color: #757575;
+}
+
+.title-text {
+}
+
+.title-image {
+  float: right;
+  margin-top: 0px;
+}
+
+.title-button {
+  float: left;
+}
+
+.problem-section {
+  position: relative;
+  padding-bottom: 400px;
+  padding-top: 100px;
+}
+
+.problem-section p,
+.solution-section p {
+  line-height: 1.9;
+  color: #757575;
+}
+
+.problem-header,
+.solution-header {
+  max-width: 70%;
+  text-align: center;
+  margin: 0 auto 70px;
+}
+
+.problem-title,
+.solution-title {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+.problem-section hr,
+.solution-section hr {
+  border-top-color: rgba(117, 117, 117, 0.09);
+  margin: 2rem auto;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  width: 50px;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.problem-lead,
+.solution-lead {
+  font-size: 1.25rem;
+}
+
+.problem-subtitle {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #2185d0;
+}
+
+.problem-text {
+  font-size: 1.1rem;
+}
+
+.ui.grid > .row.problem-row {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.solution-section-top {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  bottom: 0;
+}
+
+.solution-section {
+  padding-top: 100px;
+  position: relative;
+  background-color: #e6effe;
+}
+
+.solution-title {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+.solution-section-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.ui.grid.solution-grid {
+  padding-bottom: 100px;
+}
+
+.media {
+  display: flex;
+  align-items: flex-start;
+}
+
+.media-icon {
+  line-height: 1;
+  width: 70px;
+  color: #98bffc;
+}
+
+.media-body {
+  flex: 1;
+  text-align: left;
+}
+
+.cell {
+  padding: 3rem 1.5rem !important;
+}
+
+.solution-section h5 {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #98bffc;
+}
+
+.ui.button.solution-button {
+  margin: 3em 0 5em 0;
+}
+
+/* course */
+
+.selected {
+  font-weight: bold;
+}

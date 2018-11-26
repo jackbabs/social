@@ -7,29 +7,25 @@ const passport = require('passport');
 
 const app = express();
 
-app.use(express.static('dist'))
+app.use(express.static('dist'));
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// DB Config 
-const db = process.env.DATABASE_URL
+// DB Config
+const db = process.env.DATABASE_URL;
 
-mongoose.connect(db).then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
+mongoose
+  .connect(db)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
-// Passport Config 
+// Passport Config
 // require('./config/passport')(passport);
 
 // Use Routes
-app.get('/', (req, res) => res.json({ msg: "claudia this is a coded message to tell you we must depart the barbican and find a sandwich"}))
 
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => console.log(`Server running on port ${port}`))
-
-
-
-
-
-
+app.listen(port, () => console.log(`Server running on port ${port}`));
