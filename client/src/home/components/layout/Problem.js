@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, Image } from 'semantic-ui-react';
-import solutionTop from '../../img/solution-top.svg';
+import solutionTop from '../../../img/solution-top.svg';
 
 const Problem = ({ refProp }) => (
   <section ref={refProp} className="problem-section">

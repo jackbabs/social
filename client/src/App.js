@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import Landing from './home/components/layout/Landing';
+import Home from './home/components/layout/Home';
+import Landing from './course/components/layout/Landing';
+import Login from './course/components/auth/Login';
+import Register from './course/components/auth/Register';
 
 import './App.css';
 
@@ -13,7 +16,14 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/conversationdecoded" component={Landing} />
+            <Route exact path="/conversationdecoded/login" component={Login} />
+            <Route
+              exact
+              path="/conversationdecoded/register"
+              component={Register}
+            />
           </div>
         </Router>
       </Provider>

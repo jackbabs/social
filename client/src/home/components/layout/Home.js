@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import TopbarControl from './TopbarControl';
+import Title from './Title';
 import Problem from './Problem';
 import Solution from './Solution';
 
-class Landing extends Component {
+class Home extends Component {
   problemSection = React.createRef();
 
   scrollToProblemSection = () => {
@@ -24,4 +25,4 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+export default Home;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Grid, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import solutionBottom from '../../img/solution-bottom.svg';
+import solutionBottom from '../../../img/solution-bottom.svg';
 
 const Solution = () => (
   <section className="solution-section">
