@@ -11,7 +11,8 @@ class CheckoutForm extends Component {
     email: '',
     password: '',
     password2: '',
-    errors: {}
+    errors: {},
+    complete: false
   };
 
   componentDidMount() {
@@ -34,7 +35,7 @@ class CheckoutForm extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
+  // console.log('[token]', payload)
   // TODO: Add register user form sections and name + email state etc
   handleSubmit = e => {
     e.preventDefault();
@@ -49,9 +50,10 @@ class CheckoutForm extends Component {
     if (this.props.stripe) {
       this.props.stripe
         .createToken()
-        .then(payload => console.log('[token]', payload))
-        .then(this.props.checkout(payload))
-        .then(this.props.registerUser(newUser, this.props.history));
+        .then(payload => this.props.checkout(payload))
+        .then(this.props.registerUser(newUser, this.props.history))
+        .catch(err => console.log(err))
+        .then(this.setState({ complete: true }))
     } else {
       console.log("Stripe.js hasn't loaded yet");
     }
@@ -59,10 +61,12 @@ class CheckoutForm extends Component {
 
   render() {
     const { errors } = this.state;
+    if (this.state.complete) return <h1>Purchase Complete</h1>
     return (
       <form noValidate onSubmit={this.handleSubmit} className="checkout">
         <label>Account details</label>
         <input
+          className="accountInput"
           name="name"
           type="text"
           placeholder="Name"
@@ -71,6 +75,8 @@ class CheckoutForm extends Component {
           error={errors.name}
         />
         <input
+        className="accountInput"
+
           name="email"
           type="email"
           placeholder="Email Address"
@@ -79,6 +85,7 @@ class CheckoutForm extends Component {
           error={errors.email}
         />
         <input
+        className="accountInput"
           name="password"
           type="password"
           placeholder="Password"
@@ -87,6 +94,7 @@ class CheckoutForm extends Component {
           error={errors.password}
         />
         <input
+        className="accountInput"
           name="password2"
           type="password"
           placeholder="Confirm password"
@@ -94,6 +102,7 @@ class CheckoutForm extends Component {
           onChange={this.onChange}
           error={errors.password2}
         />
+
         <label>Payment Information</label>
         <CardElement />
         <button>Send</button>
@@ -102,7 +111,7 @@ class CheckoutForm extends Component {
   }
 }
 
-CheckoutForm.PropTypes = {
+CheckoutForm.propTypes = {
   checkout: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,

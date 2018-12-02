@@ -278,8 +278,16 @@ body {
     border-radius: 4px;
     background: white;
   }
+  input,
+  .accountInput {
+    width: 800px;
+    font-size: 0.75em;
+  }
   input::placeholder {
     color: #aab7c4;
+   
+    font-family: 'Source Code Pro', monospace;
+
   }
   input:focus,
   .StripeElement--focus {

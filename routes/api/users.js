@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const stripe = require("stripe")("sk_test_0JfbXqHDX2QhcT0VRllmmhmj");
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register');
@@ -17,7 +18,20 @@ const User = require('../../models/User');
 // @access  Public
 router.get('/test', (req, res) => res.json({ msg: 'Users works' }));
 
-// @route   GET api/users/register
+// @route   POST api/users/checkout
+// @desc    Handle stripe charge 
+// @access  Public 
+router.post('/charge', (req, res) => {
+  stripe.charges.create({
+    amount: 2000,
+    currency: "usd",
+    description: "An example charge",
+    source: req.body
+  }).then(status => res.json(status))
+  .catch(err => console.log(err))
+})
+
+// @route   POST api/users/register
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
