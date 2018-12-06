@@ -5,10 +5,13 @@ import jwt_decode from 'jwt-decode';
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
 
 // Checkout
-export const checkout = checkoutData => dispatch => {
+export const checkout = (tokenId, userData, history) => dispatch => {
   axios
-    .post('api/users/charge', checkoutData)
-    .then(res => console.log('successful payment'))
+    .post('../api/users/charge', { token: tokenId, userData: userData })
+    .then(res => console.log('payment success'))
+    .then(res => {
+      dispatch(registerUser(userData, history));
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -20,8 +23,8 @@ export const checkout = checkoutData => dispatch => {
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post('api/users/register', userData)
-    .then(res => history.push('/conversationdecoded/login'))
+    .post('../api/users/register', userData)
+    .then(res => history.push('/welcome'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

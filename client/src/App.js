@@ -19,11 +19,9 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/conversationdecoded" component={Landing} />
             <Route exact path="/conversationdecoded/login" component={Login} />
-            <Route
-              exact
-              path="/conversationdecoded/register"
-              component={Register}
-            />
+            <Route exact path="/conversationdecoded/register" component={Register} />
+            <Route exact path="/conversationdecoded/welcome" component={Welcome}/>
+            <Route exact path="/conversationdecoded/dashboard" component={Dashboard}/>
           </div>
         </Router>
       </Provider>

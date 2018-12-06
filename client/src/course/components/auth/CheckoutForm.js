@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { checkout, registerUser } from '../../../actions/authActions';
+import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
@@ -11,8 +14,7 @@ class CheckoutForm extends Component {
     email: '',
     password: '',
     password2: '',
-    errors: {},
-    complete: false
+    errors: {}
   };
 
   componentDidMount() {
@@ -50,10 +52,11 @@ class CheckoutForm extends Component {
     if (this.props.stripe) {
       this.props.stripe
         .createToken()
-        .then(payload => this.props.checkout(payload))
-        .then(this.props.registerUser(newUser, this.props.history))
-        .catch(err => console.log(err))
-        .then(this.setState({ complete: true }))
+        .then(data => data.token.id)
+        .then(tokenId =>
+          this.props.checkout(tokenId, newUser, this.props.history)
+        )
+        .catch(err => console.log(err));
     } else {
       console.log("Stripe.js hasn't loaded yet");
     }
@@ -61,7 +64,6 @@ class CheckoutForm extends Component {
 
   render() {
     const { errors } = this.state;
-    if (this.state.complete) return <h1>Purchase Complete</h1>
     return (
       <form noValidate onSubmit={this.handleSubmit} className="checkout">
         <label>Account details</label>
@@ -74,9 +76,9 @@ class CheckoutForm extends Component {
           onChange={this.onChange}
           error={errors.name}
         />
+        {errors.name && <p className="error-message">{errors.name}</p>}
         <input
-        className="accountInput"
-
+          className="accountInput"
           name="email"
           type="email"
           placeholder="Email Address"
@@ -84,8 +86,9 @@ class CheckoutForm extends Component {
           onChange={this.onChange}
           error={errors.email}
         />
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <input
-        className="accountInput"
+          className="accountInput"
           name="password"
           type="password"
           placeholder="Password"
@@ -93,8 +96,9 @@ class CheckoutForm extends Component {
           onChange={this.onChange}
           error={errors.password}
         />
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <input
-        className="accountInput"
+          className="accountInput"
           name="password2"
           type="password"
           placeholder="Confirm password"
@@ -102,10 +106,14 @@ class CheckoutForm extends Component {
           onChange={this.onChange}
           error={errors.password2}
         />
+        {errors.password2 && (
+          <p className="error-message">{errors.password2}</p>
+        )}
 
         <label>Payment Information</label>
         <CardElement />
-        <button>Send</button>
+
+        <button>Submit</button>
       </form>
     );
   }
@@ -123,7 +131,11 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { checkout, registerUser }
-)(injectStripe(CheckoutForm));
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    { checkout, registerUser }
+  ),
+  injectStripe
+)(CheckoutForm);

@@ -285,9 +285,8 @@ body {
   }
   input::placeholder {
     color: #aab7c4;
-   
-    font-family: 'Source Code Pro', monospace;
 
+    font-family: 'Source Code Pro', monospace;
   }
   input:focus,
   .StripeElement--focus {
@@ -299,5 +298,11 @@ body {
   .StripeElement.IdealBankElement,
   .StripeElement.PaymentRequestButton {
     padding: 0;
+  }
+  .is-invalid {
+    color: red;
+  }
+  .error-message {
+    color: red;
   }
 }
