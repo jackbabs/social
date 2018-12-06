@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { checkout, registerUser } from '../../../actions/authActions';
-import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { CardElement, injectStripe } from 'react-stripe-elements';
@@ -17,16 +16,7 @@ class CheckoutForm extends Component {
     errors: {}
   };
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -122,17 +112,14 @@ class CheckoutForm extends Component {
 CheckoutForm.propTypes = {
   checkout: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   errors: state.errors
 });
 
 export default compose(
-  withRouter,
   connect(
     mapStateToProps,
     { checkout, registerUser }
