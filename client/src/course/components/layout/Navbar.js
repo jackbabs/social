@@ -3,13 +3,30 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Container, Menu } from 'semantic-ui-react';
+import { logoutUser } from '../../../actions/authActions';
 
 class Navbar extends Component {
   state = {};
   handleItemClick = () => this.setState({ activeItem: name });
 
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+  }
+
   render() {
     const { activeItem } = this.state;
+
+    const authLinks = (
+      <Menu.Menu position="right">
+        <Menu.Item as={Link} to="/conversationdecoded/dashboard" />
+        <Menu.Item>
+          <Button onClick={this.onLogoutClick.bind(this)} primary>
+            Logout
+          </Button>
+        </Menu.Item>
+      </Menu.Menu>
+    );
 
     return (
       <Menu>
